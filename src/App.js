@@ -1,26 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import {NavLink, Redirect, Route, Switch} from 'react-router-dom';
+import './App.scss';
+import AssignmentOne from "./pages/assignment-one/assignement-one";
+import AssignmentTwo from "./pages/assignment-two/assignment-two-conatiner";
+import BMSLogo from './assets/images/bms.jpg';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    render() {
+        return (
+            <section className="hero is-fullheight">
+                <div className="hero-head">
+                    <nav className="navbar">
+                        <div className="container">
+                            <div className="navbar-brand">
+                                <a href="/">
+                                    <img className="logo" src={BMSLogo} alt="Logo"/>
+                                    {/*<h3 className="title is-3">BMS</h3>*/}
+                                </a>
+                                <span className="navbar-burger burger" data-target="navbarMenuHeroA">
+                                        <span/>
+                                        <span/>
+                                        <span/>
+                                    </span>
+                            </div>
+                            <div id="navbarMenuHeroA" className="navbar-menu">
+                                <div className="navbar-end">
+                                    <NavLink activeClassName="is-active" to="/one" className="navbar-item">
+                                        Assignment One
+                                    </NavLink>
+                                    <NavLink activeClassName="is-active" to="/two" className="navbar-item">
+                                        Assignment Two
+                                    </NavLink>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+
+                <div className="hero-body">
+                    <Switch>
+                        <Route exact path="/one" component={AssignmentOne}/>
+                        <Route exact path="/two" component={AssignmentTwo}/>
+                        <Redirect to="/one"/>
+                    </Switch>
+                </div>
+            </section>
+        );
+    }
 }
 
 export default App;
